@@ -1,0 +1,17 @@
+<%= form_for :party, url: party_index_path do |p| %>
+<div>
+  <%= p.label :hash_tag %>
+  <%= p.text_field :hash_tag %>
+
+    <%= fields_for @user do |u| %>
+
+    <%= u.label :name %>
+    <%= u.text_field :name %>
+
+    <%= u.label :phone_number %>
+    <%= u.text_field :phone_number %>
+    <% end %>
+  <%= p.submit "Submit" %>
+  <% end %>
+
+</div>
