@@ -1,19 +1,19 @@
 var _run = function(videoId) {
   YouTube.loadPlayer(videoId);
 }
+var onYouTubePlayerReady = function(playerId) {
+    ytplayer = document.getElementById("ytPlayer");
+    ytplayer.addEventListener("onError", "onPlayerError");
+  };
 
 var YouTube = {
-  onYouTubePlayerReady: function(playerId) {
-     var ytplayer = document.getElementById("ytPlayer");
-    ytplayer.addEventListener("onError", "onPlayerError");
-  },
   loadVideo: function(videoId) {
     if (ytplayer) {
-      ytplayer.loadVideoById(videoID);
+      ytplayer.loadVideoById(videoId);
     }
   },
   loadPlayer: function(videoID) {
-    var params = { allowScriptAccess: "always"};
+    params = { allowScriptAccess: "always"};
     var atts = { id: "ytPlayer" };
     swfobject.embedSWF("http://www.youtube.com/v/" + videoID +
     "?version=3&enablejsapi=1&playerapiid=player1",
@@ -23,11 +23,14 @@ var YouTube = {
     $.ajax({
       url: "/retrieve_video_id",
       method: "GET",
-      dataType: "json"
+      dataType: "jsonp",
+      crossDomain: true
     }).success(function(response){
-        _run(response.url.youtube_url);
+        console.log(response);
+        _run(song_object.youtube_url);
         $("#videoDiv").slideDown();
       }).fail(function(response){
+        console.log(response);
         console.log("Video Failed To Load");
     });
   },
@@ -36,10 +39,13 @@ var YouTube = {
     $.ajax({
       url: "/retrieve_video_id",
       method: "GET",
-      dataType: "json"
+      dataType: "jsonp",
+      crossDomain: true
     }).success(function(response){
-      YouTube.loadVideo(response.url.youtube_url);
+      console.log(response);
+      YouTube.loadVideo(response.youtube_url);
     }).fail(function(response){
+      console.log(response);
       console.log("Your video failed to load.");
     });
   }

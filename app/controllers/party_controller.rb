@@ -44,7 +44,10 @@ class PartyController < ApplicationController
     @current_video = @queue.shift
     @party.update(queue: @queue)
 
-    render json: {url: @current_video }
+    render json: @current_video.to_json, :callback => params[:callback]
+    # response = params[:callback] + '(' + @current_video.to_json + ')'
+    # render :text => response 
+
   end
 
   def retrieve_queue
