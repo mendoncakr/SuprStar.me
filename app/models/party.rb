@@ -5,7 +5,7 @@ class Party < ActiveRecord::Base
   has_many     :songs
   has_many 		 :comments
 
-  validates    :hash_tag, presence: true
+  # validates    :hash_tag, presence: true
   # validates    :hash_tag, uniqueness: true
 
 end
