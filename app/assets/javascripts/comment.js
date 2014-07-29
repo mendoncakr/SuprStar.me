@@ -1,9 +1,3 @@
-var polling = function(){
-  if ($("#comments").length > 0) {
-    setTimeout(Comment.updateQueue, 5000);
-    setTimeout(Comment.updateComments, 5000);
-  }
-};
 
 var Comment = {
   updateComments: function(){
@@ -12,7 +6,7 @@ var Comment = {
       url: "/retrieve_comments",
       method: "GET",
       dataType: "jsonp",
-      data: latestCommentTime,
+      data: latestCommentTime, 
       crossDomain: true
     }).success(function(response){
       for (var i=0; i < response.content.length; i++) {
@@ -45,6 +39,13 @@ var Comment = {
     }).fail(function(response){
       console.log("FAIL");
     });
+  }
+};
+
+var polling = function(){
+  if ($("#comments").length > 0) {
+    setTimeout(Comment.updateQueue, 5000);
+    setTimeout(Comment.updateComments, 5000);
   }
 };
 
