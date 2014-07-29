@@ -1,5 +1,4 @@
 class CommentController < ApplicationController
-	include CommentHelper
 	skip_before_action :verify_authenticity_token
 	respond_to :json
 
@@ -11,7 +10,7 @@ class CommentController < ApplicationController
 			hash = {name: com.user.name, obj: com}
 			@new_comments << hash
 		end
-		render json: {content: @new_comments}
+		render json: @new_comments.to_json, :callback => params[:callback]
 	end
 
 end

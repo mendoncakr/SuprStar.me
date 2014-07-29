@@ -9,8 +9,10 @@ var Comment = {
     var latestCommentTime = {time: $(".comment li:last-child").attr("data-time")};
     $.ajax({
       url: "/retrieve_comments",
-      method: "POST",
-      data: latestCommentTime
+      method: "GET",
+      dataType: "jsonp",
+      data: latestCommentTime,
+      crossDomain: true
     }).success(function(response){
       for (var i=0; i < response.content.length; i++) {
         var time = response.content[i].obj.created_at;
@@ -29,7 +31,9 @@ var Comment = {
   updateQueue: function(){
     $.ajax({
       url: "/retrieve_queue",
-      method: "GET"
+      method: "GET",
+      dataType: "jsonp",
+      crossDomain: true
     }).success(function(response){
       for (var i=0; i < response.queue.length; i++) {
         var comment = '<li>' + response.queue[i].name + '</li>';

@@ -45,14 +45,11 @@ class PartyController < ApplicationController
     @party.update(queue: @queue)
 
     render json: @current_video.to_json, :callback => params[:callback]
-    # response = params[:callback] + '(' + @current_video.to_json + ')'
-    # render :text => response 
-
   end
 
   def retrieve_queue
     @queue = Party.find_by_id(session[:party_id]).queue
-    render json: {queue: @queue}
+    render json: @queue.to_json, :callback => params[:callback]
   end
 
   private
