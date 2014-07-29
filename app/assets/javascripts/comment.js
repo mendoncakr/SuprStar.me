@@ -23,7 +23,7 @@
             $(".comment li:first-child").slideUp("slow").remove();
           }
           appendLi;
-        };
+        }
       }).fail(function(response){
         console.log("No Comments yet");
       });
@@ -56,4 +56,5 @@
    $("#start").on("click", function(e){
     e.preventDefault();
     _runPolling();
-  });
+  }
+});
