@@ -14,8 +14,6 @@ Rails.application.routes.draw do
 
   get 'retrieve_party' => "party#show"
 
-#add only actions we need
-  resources :comment
-  resources :party
+  resources :party, only: [:show, :new, :create, :retrieve_video_id]
 
 end

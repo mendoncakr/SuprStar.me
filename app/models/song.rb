@@ -6,5 +6,4 @@ class Song < ActiveRecord::Base
 
   validates    :name, presence: true
   validates    :youtube_url, presence: true
-
 end

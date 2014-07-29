@@ -1,23 +1,17 @@
-<%= form_for :party, url: party_index_path do |p| %>
+<%= form_for @party, url: "/party", method: :post do |p| %>
+  <%= p.label :hash_tag %><br>
+  <%= p.text_field :hash_tag %>
 
-<%= p.label :hash_tag %><br>
+  <%= fields_for @user do |u| %> <br>
+    <%= u.label :name %><br>
+    <%= u.text_field :name %><br>
+    <%= u.label :phone_number %><br>
+    <%= u.text_field :phone_number %>
+  <% end %> <br>
 
-<%= p.text_field :hash_tag %>
-
-<%= fields_for @user do |u| %>
-<br>
-<%= u.label :name %><br>
-<%= u.text_field :name %>
-<br>
-<%= u.label :phone_number %><br>
-<%= u.text_field :phone_number %>
+  <%= fields_for @song do |s| %>
+    <%= s.label :first_song %><br>
+    <%= s.text_field :name %>
+    <% end %> <br>
+  <%= p.submit "Submit" %>
 <% end %>
-<br>
-<%= fields_for @song do |s| %>
-<%= s.label :first_song %><br>
-<%= s.text_field :name %>
-<% end %>
-<br>
-<%= p.submit "Submit" %>
-
-<% end %>  

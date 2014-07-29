@@ -11,4 +11,8 @@ RSpec.describe Song, :type => :model do
     it { should validate_presence_of(:name) }
   end
 
+  describe "#attributes" do
+    it "should set name and youtube-url to nil"
+  end
+
 end

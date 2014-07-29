@@ -24,18 +24,10 @@ ActiveRecord::Schema.define(version: 20140726163700) do
     t.datetime "updated_at"
   end
 
-  create_table "notifications", force: true do |t|
-    t.boolean  "was_notified", default: false
-    t.integer  "user_id"
-    t.integer  "party_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "parties", force: true do |t|
     t.string   "name"
     t.string   "hash_tag"
-    t.text     "queue"
+    t.text     "queue",      default: "[]"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -53,7 +45,6 @@ ActiveRecord::Schema.define(version: 20140726163700) do
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "phone_number"
-    t.boolean  "is_verified",  default: false
     t.integer  "party_id"
     t.datetime "created_at"
     t.datetime "updated_at"

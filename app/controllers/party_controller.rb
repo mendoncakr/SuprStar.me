@@ -11,26 +11,29 @@ class PartyController < ApplicationController
     @party = Party.find(session[:party_id])
     @comments = @party.comments
     @queue = @queue = @party.queue
+
   end
 
   def create
     @party = Party.new(party_params)
+    #@party.save!
     @user = User.new(user_params)
+    #@user.save!
     @song = Song.new(first_song)
+    #@song.save!
     if @party.save && @user.save
       @user.update(phone_number: "+1" + @user.phone_number)
       session[:party_id] = @party.id
-      p "-"* 100
-      p first = find(first_song[:name])
-      p first[:title]
-      p @song = Song.create(name: first[:title], youtube_url: first[:ytid], user_id: @user.id, party_id: @party.id)
-      p "-"* 100
+      first = find(first_song[:name])
+      first[:title]
+      @song = Song.create(name: first[:title], youtube_url: first[:ytid], user_id: @user.id, party_id: @party.id)
       @party.queue = []
       @queue = @party.queue << @song.serializable_hash
       @party.update(queue: @queue)
       redirect_to retrieve_party_path
-    else
-      flash[:notice] = "Something went wrong, please try again."
+    elsif
+      flash[:notice] = @user.errors.messages
+      flash[:notice] = @party.errors.messages
       render 'index'
     end
   end
