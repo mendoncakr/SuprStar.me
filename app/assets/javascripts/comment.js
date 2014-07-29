@@ -1,6 +1,7 @@
-$(function(){
+var polling = function(){
   if ($("#comments").length > 0) {
-    setTimeout(YouTube.updateQueue, 5000);
+    setTimeout(Comment.updateQueue, 5000);
+    setTimeout(Comment.updateComments, 5000);
   };
 });
 
@@ -48,11 +49,12 @@ var Comment = {
 };
 
 var _runPolling = function() {
-  Comment.updateComments();
-  Comment.updateQueue();
+  polling();
 };
 
 $(document).ready(function(){
+ $("#start").on("click", function(e){
+  e.preventDefault();
  _runPolling();
-
+ });
 });
