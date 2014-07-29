@@ -22,7 +22,7 @@ var Comment = {
         if($(".comment li").size() >= 5) {
           $(".comment li:first-child").slideUp("slow").remove();
         }
-        appendLi
+        appendLi;
       };
     }).fail(function(response){
       console.log("No Comments yet");
@@ -55,6 +55,6 @@ var _runPolling = function() {
 $(document).ready(function(){
  $("#start").on("click", function(e){
   e.preventDefault();
- _runPolling();
- });
+  _runPolling();
+});
 });
