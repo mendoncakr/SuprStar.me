@@ -53,7 +53,7 @@ var _runPolling = function() {
 };
 
 $(document).ready(function(){
- $("#start").on("click", function(e){
+ $("#start").on("click", (function(e){
   e.preventDefault();
   _runPolling();
 });
