@@ -16,4 +16,5 @@ module NotificationHelper
 	def read_sms
 		twilio_client.account.messages.list({:to => ENV["TWILIO_NUMBER"]}).first
 	end
+
 end

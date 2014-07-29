@@ -1,7 +1,7 @@
 module YouTubeHelper
   require 'google/api_client'
 
-  YOUTUBE_DEVELOPER_KEY = "AIzaSyB5w-oLpsvClRO5RDiVlyWQXy2x6r9p6wI"
+  YOUTUBE_DEVELOPER_KEY = ENV["YOUTUBE_KEY"]
   YOUTUBE_API_SERVICE_NAME = 'youtube'
   YOUTUBE_API_VERSION = 'v3'
 
@@ -24,7 +24,7 @@ module YouTubeHelper
       :api_method => youtube.search.list,
       :parameters => {
         :part => 'snippet',
-        :q => song + " karaoke"
+        :q => song + " karaoke lyrics"
       }
       )
 

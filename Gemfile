@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-gem 'dotenv-rails', :groups => [:development, :test]
-gem 'rails_12factor', group: :production
-gem 'alchemy-api-rb', :require => "alchemy_api"
 
+gem 'rails_12factor', group: :production
+# gem 'alchemy-api-rb', :require => "alchemy_api"
+gem 'dotenv'
 gem 'rack-jsonp-middleware',
 :require => 'rack/jsonp'
 

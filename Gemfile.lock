@@ -55,8 +55,11 @@ GEM
     dotenv (0.11.1)
       dotenv-deployment (~> 0.0.2)
     dotenv-deployment (0.0.2)
+<<<<<<< HEAD
     dotenv-rails (0.11.1)
       dotenv (= 0.11.1)
+=======
+>>>>>>> 842e0d609b02cb58e4c49c8c70db731294b2a6aa
     erubis (2.7.0)
     excon (0.38.0)
     execjs (2.2.1)

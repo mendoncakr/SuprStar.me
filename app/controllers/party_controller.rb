@@ -11,21 +11,15 @@ class PartyController < ApplicationController
     @party = Party.find(session[:party_id])
     @comments = @party.comments
     @queue = @queue = @party.queue
-
   end
 
   def create
     @party = Party.new(party_params)
-    #@party.save!
     @user = User.new(user_params)
-    #@user.save!
     @song = Song.new(first_song)
-    #@song.save!
     if @party.save && @user.save
-      @user.update(phone_number: "+1" + @user.phone_number)
       session[:party_id] = @party.id
       first = find(first_song[:name])
-      first[:title]
       @song = Song.create(name: first[:title], youtube_url: first[:ytid], user_id: @user.id, party_id: @party.id)
       @party.queue = []
       @queue = @party.queue << @song.serializable_hash
@@ -43,13 +37,22 @@ class PartyController < ApplicationController
     @queue = @party.queue
     @current_video = @queue.shift
     @party.update(queue: @queue)
+    
+    render json: {url: @current_video }.to_json, :callback => params[:callback]
+  end
 
-    render json: @current_video.to_json, :callback => params[:callback]
+   def retrieve_next_video_id
+    @party = Party.find_by_id(session[:party_id]) #where to find id?
+    @queue = @party.queue
+    @current_video = @queue.shift
+    @party.update(queue: @queue)
+
+    render json: {url: @current_video }.to_json
   end
 
   def retrieve_queue
     @queue = Party.find_by_id(session[:party_id]).queue
-    render json: @queue.to_json, :callback => params[:callback]
+    render json: {queue: @queue}.to_json
   end
 
   private

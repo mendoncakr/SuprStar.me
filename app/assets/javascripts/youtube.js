@@ -26,8 +26,8 @@ var YouTube = {
       dataType: "jsonp",
       crossDomain: true
     }).success(function(response){
-        console.log(response);
-        _run(song_object.youtube_url);
+        console.log(song_object);
+        _run(song_object.url.youtube_url);
         $("#videoDiv").slideDown();
       }).fail(function(response){
         console.log(response);
@@ -37,13 +37,13 @@ var YouTube = {
 
   get_next_video: function() {
     $.ajax({
-      url: "/retrieve_video_id",
+      url: "/retrieve_next_video_id",
       method: "GET",
-      dataType: "jsonp",
-      crossDomain: true
+      dataType: "json"
     }).success(function(response){
+      console.log("GOT NEXT VIDEO");
       console.log(response);
-      YouTube.loadVideo(response.youtube_url);
+      YouTube.loadVideo(response.url.youtube_url);
     }).fail(function(response){
       console.log(response);
       console.log("Your video failed to load.");

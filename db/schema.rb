@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20140726163700) do
   end
 
   create_table "parties", force: true do |t|
-    t.string   "name"
     t.string   "hash_tag"
     t.text     "queue",      default: "[]"
     t.datetime "created_at"
