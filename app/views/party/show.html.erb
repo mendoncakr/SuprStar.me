@@ -7,6 +7,7 @@
           <span>
             <h2 style="color:red">Want to join?</h2>
             <h2 class="info_bar"> Text: <strong><%= @party.hash_tag%></strong> to <strong>1.845.443.4529</strong></h2>
+            <h3>(eg: <%= @party.hash_tag%>, John Quigley, Michael Jackson Beat It) </h3>
           </span>
           <% end %>
         </div>
@@ -19,14 +20,6 @@
           </div><br>
           <div>
             <meter id="booMeter" value="50" min="0" max="100"></meter>
-          </div>
-          <div id="joinText">
-            <% if current_party %>
-            <span>
-              <h2 style="color:red">Want to join?</h2>
-              <h2 class="info_bar"> Text: <strong><%= @party.hash_tag%></strong> to <strong>1.845.443.4529</strong></h2>
-            </span>
-            <% end %>
           </div>
         </div>
       </div>
