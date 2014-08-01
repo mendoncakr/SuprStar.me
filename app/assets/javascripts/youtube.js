@@ -72,24 +72,20 @@ var _initJquery = function() {
 }
 
 $(document).ready(function(){
-  YouTube.get_first_video();
   _initJquery();
-  _run();
-  $("#start").hide();
+  setTimeout(function) {
+    YouTube.get_first_video();
+  }, 300);
   $(".queue li").eq(0).animate({color: "green"}, 700);
   $(".queue li").eq(1).delay(180).animate({color: "red"}, 700);
-
-
   $("#play").click(function(e){
     e.prevendDefault();
     YouTube.playVideo();
   });
-
   $("#pause").click(function(e){
     e.preventDefault();
     YouTube.pauseVideo();
   });
-
   $("body").on("click", "#next", function(e){
     e.preventDefault();
     YouTube.get_next_video();
