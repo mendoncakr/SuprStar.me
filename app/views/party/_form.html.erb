@@ -1,16 +1,16 @@
 <%= form_for @party, url: "/party", method: :post do |p| %>
-  <%= p.label :hash_tag %><br>
+  <%#= p.label :hash_tag %><br>
   <%= p.text_field :hash_tag, placeholder: "#Hashtag" %>
 
   <%= fields_for @user do |u| %> <br>
-    <%= u.label :name %><br>
-    <%= u.text_field :name, placeholder: "Your Name"%><br>
-    <%= u.label :phone_number %><br>
-    <%= u.text_field :phone_number, placeholder: "5554441234"%>
+    <%#= u.label :name %><br>
+    <%= u.text_field :name, placeholder: "First Name"%><br>
+    <%#= u.label :phone_number %><br>
+    <%= u.text_field :phone_number, placeholder: "Phone (XXX-XXX-XXX) "%>
   <% end %> <br>
 
   <%= fields_for @song do |s| %>
-    <%= s.label :first_song %><br>
+    <%#= s.label :first_song %><br>
     <%= s.text_field :name, placeholder: "First Song"%>
     <% end %> <br><br>
   <%= p.submit "Submit", :id=>"submit"%>

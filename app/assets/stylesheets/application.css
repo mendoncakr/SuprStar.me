@@ -13,7 +13,10 @@
  *= require_tree .
  *= require_self
  */
-
+body {
+  font-family: 'Titillium Web', sans-serif;
+  font-style: italic;
+}
 
  nav {
   position: fixed;
@@ -25,13 +28,15 @@
   -webkit-transition: height 0.3s linear;
   -moz-transition: height 0.3s linear;
   transition: height 0.3s linear;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   font-size: 1em;
+  box-shadow: 0 0 18px purple;
 
 }
 nav h1 {
   font-size: 1em;
   float: left;
+  line-height: 75px;
   font-size: 50px;
   padding-top: 10px;
   padding-left: 20px;
@@ -57,7 +62,7 @@ meter {
   display: block;
   margin: 0 auto;
 
-  width: 550px;
+  width: 50%;
   height: 25px;
 
   border: 1px solid #ccc;

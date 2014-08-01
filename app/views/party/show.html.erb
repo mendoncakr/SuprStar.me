@@ -1,42 +1,44 @@
 <body class="show">
-
-
-  <div id="container">
-
-    <div id="left_side">
-      <div>
-        <meter id="booMeter" value="50" min="0" max="100"></meter>
-      </div>
-      <div class="videoContainer">
-        <div id="videoPlayer"></div>
-        <div id="videoButtons">
-          <button class="button" id="start">Start!</button>
-          <button class="button" id="next">Next!</button>
-          <button class="button" id="play">Play</button>
-          <button class="button" id="pause">Pause</button>
+  <div class=background>
+    <div id="container">
+      <div id="left_side">
+        <div id="joinText">
+          <% if current_party %>
+          <span>
+            <h2 style="color:red">Want to join?</h2>
+            <h2 class="info_bar"> Text: <strong><%= @party.hash_tag%></strong> to <strong>1.845.443.4529</strong></h2>
+          </span>
+          <% end %>
         </div>
-      </div>
-      <div id="joinText">
-        <% if current_party %>
-        <span>
-          <h2 style="color:red">Want to join?</h2>
-          <h2 class="info_bar"> Text: <strong><%= @party.hash_tag%></strong> to <strong>1.845.443.4529</strong></h2>
-        </span>
-        <% end %>
+        <div class="videoContainer">
+          <div id="videoPlayer"></div>
+          <div id="videoButtons">
+            <button class="button" id="play">Play</button>
+            <button class="button" id="pause">Pause</button>
+            <button class="button" id="next">Next!</button>
+          </div><br>
+          <div>
+            <meter id="booMeter" value="50" min="0" max="100"></meter>
+          </div>
+          <div id="joinText">
+            <% if current_party %>
+            <span>
+              <h2 style="color:red">Want to join?</h2>
+              <h2 class="info_bar"> Text: <strong><%= @party.hash_tag%></strong> to <strong>1.845.443.4529</strong></h2>
+            </span>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
   <div id="right_side">
-
-
     <div id="songlist">
       <h2>Songlist</h2>
       <ul class="queue">
         <li class="marquee" id="#{@first_song['id']"><%= @first_song["name"] %></li>
       </ul>
     </div>
-
     <div id="comments">
       <h2>Comments</h2>
       <ul class="comment">
@@ -49,4 +51,7 @@
         </ul>
       </div>
     </div>
-  </body>
+  </div>
+</div>
+</body>
+

@@ -69,33 +69,25 @@ var _initJquery = function() {
   }, function(){
     $(this).animate({backgroundColor: "#666666"}, 200);
   });
-
-  $(".show .queue li").hover(function(){
-    $(this).animate({backgroundColor: 'rgba(0,0,0,1)'}, 150);
-  }, function(){
-    $(this).animate({backgroundColor: 'rgba(0,0,0,0.2)'}, 150);
-  });
 }
 
 $(document).ready(function(){
   _initJquery();
+  _run();
+  YouTube.get_first_video();
+  $("#start").hide();
+  $(".queue li").eq(0).animate({color: "green"}, 700);
+  $(".queue li").eq(1).delay(180).animate({color: "red"}, 700);
 
 
   $("#play").click(function(e){
+    e.prevendDefault();
     YouTube.playVideo();
   });
 
   $("#pause").click(function(e){
-    YouTube.pauseVideo();
-  });
-
-  $("#start").click(function(e){
     e.preventDefault();
-    $(".queue li").eq(0).animate({backgroundColor: "green"}, 700);
-    $(".queue li").eq(1).delay(180).animate({backgroundColor: "red"}, 700);
-    $("#start").fadeOut();
-    YouTube.get_first_video();
-    $("#videoPlayer").slideDown();
+    YouTube.pauseVideo();
   });
 
   $("body").on("click", "#next", function(e){
@@ -103,8 +95,8 @@ $(document).ready(function(){
     YouTube.get_next_video();
     $(".queue li:first-child").slideUp("slow", function(){
       $(".queue li:first-child").remove();
-      $(".queue li").eq(0).animate({backgroundColor: "green"}, 700);
-      $(".queue li").eq(1).delay(180).animate({backgroundColor: "red"}, 700);
+      $(".queue li").eq(0).animate({color: "green"}, 700);
+      $(".queue li").eq(1).delay(180).animate({color: "red"}, 700);
       $(".queue li").eq(4).slideDown("slow").show();
     });
   });
