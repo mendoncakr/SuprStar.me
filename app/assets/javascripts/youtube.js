@@ -72,9 +72,9 @@ var _initJquery = function() {
 }
 
 $(document).ready(function(){
+  YouTube.get_first_video();
   _initJquery();
   _run();
-  YouTube.get_first_video();
   $("#start").hide();
   $(".queue li").eq(0).animate({color: "green"}, 700);
   $(".queue li").eq(1).delay(180).animate({color: "red"}, 700);
