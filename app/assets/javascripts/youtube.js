@@ -73,9 +73,9 @@ var _initJquery = function() {
 
 $(document).ready(function(){
   _initJquery();
-  setTimeout(function) {
-    YouTube.get_first_video();
-  }, 300);
+
+  YouTube.get_first_video();
+
   $(".queue li").eq(0).animate({color: "green"}, 700);
   $(".queue li").eq(1).delay(180).animate({color: "red"}, 700);
   $("#play").click(function(e){
