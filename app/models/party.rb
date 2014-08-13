@@ -6,9 +6,6 @@ class Party < ActiveRecord::Base
   has_many 		 :comments, dependent: :destroy
 
   validates    :hash_tag, presence: true
-
-  
-  # WIP: Causing error with validation of unique hashtag
   # validates    :hash_tag, uniqueness: true
 
 end
