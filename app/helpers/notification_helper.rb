@@ -61,31 +61,27 @@ module NotificationHelper
 		case
 		when all_parameters_met
 			video = find(title_artist)
-
 			user = User.create(name: name, phone_number: phone_number,
 												party_id: party.id)
 			song = Song.create(name: video[:title], user_id: user.id,
 												party_id: user.party.id, youtube_url: video[:ytid])
 			add_song_to_user_queue(user, song)
-			# party_queue = user.party.queue
-			# party_queue << song.serializable_hash
 			party.update(queue: party_queue)
-
 			send_sms(phone_number, get_ready_to_sing)
+
 		when user_not_verified
 			send_sms(phone_number, check_format_for_hashtag)
+
 		when user_comment
 			comment = text_body.slice!(1..text_body.length)
 			Comment.create(content: comment , user_id: user.id, party_id: user.party.id)
 			send_sms(phone_number, be_nice)
+
 		when user_sing_again
 			video = find(song_info)
-			# p video[:title]
 			song = Song.create(name: video[:title], user_id: user.id,
 												party_id: user.party.id, youtube_url: video[:ytid])
 			add_song_to_user_queue(user, song)
-			# party_queue = user.party.queue
-			# party_queue << song.serializable_hash
 			party.update(queue: party_queue)
 			send_sms(phone_number, second_song)
 		else

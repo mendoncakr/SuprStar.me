@@ -50,8 +50,9 @@ var Comment = {
         if ( howManyFound < 1) {
           if ($('.queue li').size() > 5) {
             $(".queue").append(itemQueue).hide(); // *****note
-          } else {
-          $(".queue").append(itemQueue);
+          } 
+          else {
+            $(".queue").append(itemQueue);
           }
         }
       }

@@ -2,6 +2,7 @@ class PartyController < ApplicationController
   include YouTubeHelper
   include PartyHelper
   respond_to :json
+  
   def index
     @party = Party.new
     @user = User.new
@@ -50,12 +51,12 @@ class PartyController < ApplicationController
 
   def retrieve_next_video_id
     find_video_helper(current_party)
-    render json: {url: @current_video }.to_json
+    render json: {url: @current_video }
   end
 
   def retrieve_queue
     @queue = Party.find_by_id(current_party).queue
-    render json: {queue: @queue}.to_json
+    render json: {queue: @queue}
   end
 
 private
