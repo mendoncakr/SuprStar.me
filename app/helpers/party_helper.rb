@@ -6,4 +6,5 @@ module PartyHelper
     @current_video = @queue.shift
     @party.update(queue: @queue)
   end
+  
 end

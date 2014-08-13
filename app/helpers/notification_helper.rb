@@ -1,4 +1,6 @@
 module NotificationHelper
+	include ApplicationHelper
+
 	def twilio_client
     twilio_token = ENV["TWILIO_API_KEY"]
     twilio_sid = ENV["TWILIO_ACC_SID"]
@@ -13,9 +15,8 @@ module NotificationHelper
 			)
 	end
 
-
 	def get_sms
-		twilio_client.account.messages.list({:to => "+18454434529"}).first
+		twilio_client.account.messages.list({:to => ENV["TWILIO_NUMBER"]}).first
 	end
 
 	def read_sms
@@ -26,28 +27,21 @@ module NotificationHelper
 		# Search User's table by phone_number
 		user = User.find_by(phone_number: phone_number)
 
-		# Determine incoming format of text message
-		verification_text = text_body[0].include?("#")
-		new_song_text = text_body[0].include?("1")
-		comment_text = text_body[0].include?("2")
-
 		#Determine reception of text message
 		case
-		when verification_text
+		when verification?(text_body)
 			text_body = text.body.split(",")
-			text_body
 			hash_tag = text_body[0]
 			name = text_body[1]
 			title_artist = text_body[2]
-			party = Party.find_by_hash_tag(hash_tag)
-			p party
-		when new_song_text
-			song_info = text_body.slice!(1..text_body.length)
+			party = find_party(hash_tag)
+
+		when new_song(text_body)
+			song_info = parse_text(text_body)
 			party = user.party
-		when comment_text
-			comment = text_body[1..text_body.length]
-		else
-			text_body
+
+		when new_comment(text)
+			comment = parse_text(text_body)
 		end
 
 		# Determine outgoing format of text message response
@@ -67,13 +61,16 @@ module NotificationHelper
 		case
 		when all_parameters_met
 			video = find(title_artist)
+
 			user = User.create(name: name, phone_number: phone_number,
 												party_id: party.id)
 			song = Song.create(name: video[:title], user_id: user.id,
 												party_id: user.party.id, youtube_url: video[:ytid])
-			party_queue = user.party.queue
-			party_queue << song.serializable_hash
+			add_song_to_user_queue(user, song)
+			# party_queue = user.party.queue
+			# party_queue << song.serializable_hash
 			party.update(queue: party_queue)
+
 			send_sms(phone_number, get_ready_to_sing)
 		when user_not_verified
 			send_sms(phone_number, check_format_for_hashtag)
@@ -83,11 +80,12 @@ module NotificationHelper
 			send_sms(phone_number, be_nice)
 		when user_sing_again
 			video = find(song_info)
-			p video[:title]
+			# p video[:title]
 			song = Song.create(name: video[:title], user_id: user.id,
 												party_id: user.party.id, youtube_url: video[:ytid])
-			party_queue = user.party.queue
-			party_queue << song.serializable_hash
+			add_song_to_user_queue(user, song)
+			# party_queue = user.party.queue
+			# party_queue << song.serializable_hash
 			party.update(queue: party_queue)
 			send_sms(phone_number, second_song)
 		else

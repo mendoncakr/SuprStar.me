@@ -4,13 +4,12 @@ var seconds = function(date) {
 }
 
 var Comment = {
+  
   updateComments: function(){
     var latestCommentTime = {time: $(".comment li:last-child").attr("data-time")};
-    // console.log(latestCommentTime);
     if (latestCommentTime.time === undefined) {
       var latestCommentTime = {time: 0};
     }
-    // console.log(latestCommentTime);
     $.ajax({
       url: "/retrieve_comments",
       method: "GET",
@@ -24,10 +23,6 @@ var Comment = {
         // Pass integer to divide sum by and append sum.
         $("#booMeter").attr("value", meterValue);
       }
-      console.log("Meter Value Below");
-      console.log(meterValue);
-      console.log("Meter Sum Below");
-      console.log(meterSum);
       for (var i=0; i < response.content.length; i++) {
         var time = response.content[i].obj.created_at;
         var time_in_seconds = seconds(time);
@@ -47,26 +42,20 @@ var Comment = {
     $.ajax({
       url: "/retrieve_queue",
       method: "GET"
-    }).success(function(response){
-      // console.log(response);
+    }).success(function(response){     
       for (var i=0; i < response.queue.length; i++) {
-        var song_title = response.queue[i].name;
-        // console.log(response.queue[i]);
+        var song_title = response.queue[i].name;        
         var itemQueue = '<li id="'+ response.queue[i].id +'">' + song_title + '</li>';
         var howManyFound = $('.queue').find("li[id='"+ response.queue[i].id +"']").size();
-        console.log("I am here.")
-        console.log(howManyFound);
         if ( howManyFound < 1) {
-          console.log($('.queue li').size());
           if ($('.queue li').size() > 5) {
-            console.log("less than 5");
             $(".queue").append(itemQueue).hide(); // *****note
           } else {
           $(".queue").append(itemQueue);
           }
         }
       }
-    $(".queue li").hide(); //Called when new comment is added?
+    $(".queue li").hide(); 
     $(".queue li:lt(5)").show();
     }).fail(function(response){
       console.log("FAILED to updateQueue");

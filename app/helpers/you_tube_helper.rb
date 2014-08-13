@@ -13,7 +13,6 @@ module YouTubeHelper
     :application_version => '1.0.0'
     )
     youtube = client.discovered_api(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION)
-
     return client, youtube
   end
 
@@ -25,8 +24,7 @@ module YouTubeHelper
       :parameters => {
         :part => 'snippet',
         :q => song + " karaoke lyrics"
-      }
-      )
+      })
 
       videos = []
 
@@ -41,7 +39,6 @@ module YouTubeHelper
       rescue Google::APIClient::TransmissionError => e
         puts e.result.body
       end
-
       return videos.first
     end
 
