@@ -3,7 +3,7 @@ development:
   host: localhost
   username:
   password:
-  database: gradePending_dev
+  database: supr_star_dev
   pool: 5
   timeout: 5000
 
@@ -13,7 +13,7 @@ test:
   host: localhost
   username:
   password:
-  database: gradePending_test
+  database: supr_star_test
   pool: 5
   timeout: 5000
 
@@ -22,6 +22,6 @@ production:
   host: localhost
   username:
   password:
-  database: gradePending_production
+  database: supr_star_production
   pool: 5
   timeout: 5000
