@@ -14,7 +14,7 @@
  *= require_self
  */
 body {
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Audiowide', cursive;
   font-style: italic;
 }
 
@@ -24,7 +24,7 @@ body {
   left: 0;
   width: 100%;
   z-index: 200;
-  height: 100px;
+  height: 75px;
   -webkit-transition: height 0.3s linear;
   -moz-transition: height 0.3s linear;
   transition: height 0.3s linear;
@@ -34,19 +34,19 @@ body {
 
 }
 nav h1 {
-  font-size: 1em;
+  font-size: 0.75vw;
   float: left;
   line-height: 75px;
   font-size: 50px;
-  padding-top: 10px;
+  padding-bottom: 15px;
   padding-left: 20px;
 }
 nav ul li {
   display: inline;
   padding-top: 15px;
   float: right;
-  font-family: 'Droid Sans', sans-serif;
-  font-size: 2em;
+  font-family: 'Audiowide', cursive;
+  font-size: 1.5em;
   padding-right: 20px;
   color: white;
 }
